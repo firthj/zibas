@@ -14,3 +14,9 @@ Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.2
 URL: https://github.com/datr-studio/zibas
 BugReports: https://github.com/datr-studio/zibas/issues
+Imports: 
+    extrafont,
+    ggplot2,
+    RColorBrewer,
+    grid,
+    grDevices
