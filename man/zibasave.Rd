@@ -4,16 +4,25 @@
 \alias{zibasave}
 \title{Save your Zibas plot}
 \usage{
-zibasave(plt, filename, width = 15, device = "png", family = "Spline Sans")
+zibasave(
+  filename,
+  plt = ggplot2::last_plot(),
+  path = ".",
+  width = 15,
+  device = "png",
+  family = "Spline Sans"
+)
 }
 \arguments{
-\item{plt}{A ggplot2 plot.}
+\item{filename}{File name to create on disk.}
 
-\item{filename}{Location to save plot.}
+\item{plt}{Plot to save, defaults to last plot displayed.}
+
+\item{path}{Path of the directory to save plot to: path and filename are combined to create the fully qualified file name. Defaults to the working directory.}
 
 \item{width}{Width, in cm.}
 
-\item{device}{Output device, e.g., png, pdf...}
+\item{device}{Device to use. Can either be a device function (e.g. png), or one of "eps", "ps", "tex" (pictex), "pdf", "jpeg", "tiff", "png", "bmp", "svg" or "wmf" (windows only).}
 
 \item{family}{Font to use in the graphs, defaults to Spline Sans.}
 }
