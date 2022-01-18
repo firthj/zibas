@@ -156,14 +156,8 @@ theme_ziba_ridges <- function(font_family = "Spline Sans") {
 #'
 #' Wrapper for ggplot2's save function with presets that work with the font family.
 #'
-#' @param filename File name to create on disk.
-#' @param plt Plot to save, defaults to last plot displayed.
-#' @param path Path of the directory to save plot to: path and filename are
-#' combined to create the fully qualified file name. Defaults to the working directory.
-#' @param width Width, in cm.
-#' @param device Device to use. Can either be a device function (e.g. png), or one
-#' of "eps", "ps", "tex" (pictex), "pdf", "jpeg", "tiff", "png", "bmp", "svg" or "wmf" (windows only).
-#' @param family Font to use in the graphs, defaults to Spline Sans.
+#' @inheritParams ggplot2::ggsave
+#' @param family Font to use, defaults to Spline Sans.
 #'
 #' @import ggplot2
 #' @export

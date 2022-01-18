@@ -17,17 +17,21 @@ zibasave(
 \arguments{
 \item{filename}{File name to create on disk.}
 
-\item{plt}{Plot to save, defaults to last plot displayed.}
+\item{path}{Path of the directory to save plot to: \code{path} and \code{filename}
+are combined to create the fully qualified file name. Defaults to the
+working directory.}
 
-\item{path}{Path of the directory to save plot to: path and filename are
-combined to create the fully qualified file name. Defaults to the working directory.}
+\item{width}{Plot size in \code{units} ("in", "cm", "mm", or "px").
+If not supplied, uses the size of current graphics device.}
 
-\item{width}{Width, in cm.}
-
-\item{device}{Device to use. Can either be a device function (e.g. png), or one
-of "eps", "ps", "tex" (pictex), "pdf", "jpeg", "tiff", "png", "bmp", "svg" or "wmf" (windows only).}
+\item{device}{Device to use. Can either be a device function
+(e.g. \link{png}), or one of "eps", "ps", "tex" (pictex),
+"pdf", "jpeg", "tiff", "png", "bmp", "svg" or "wmf" (windows only).}
 
 \item{family}{Font to use in the graphs, defaults to Spline Sans.}
+
+\item{...}{Other arguments passed on to the graphics device function,
+as specified by \code{device}.}
 }
 \description{
 Wrapper for ggplot2's save function with presets that work with the font family.
