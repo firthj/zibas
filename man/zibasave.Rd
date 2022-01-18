@@ -8,9 +8,10 @@ zibasave(
   filename,
   plt = ggplot2::last_plot(),
   path = ".",
-  width = 15,
+  width = 22,
   device = "png",
-  family = "Spline Sans"
+  family = "Spline Sans",
+  ...
 )
 }
 \arguments{
@@ -18,11 +19,13 @@ zibasave(
 
 \item{plt}{Plot to save, defaults to last plot displayed.}
 
-\item{path}{Path of the directory to save plot to: path and filename are combined to create the fully qualified file name. Defaults to the working directory.}
+\item{path}{Path of the directory to save plot to: path and filename are
+combined to create the fully qualified file name. Defaults to the working directory.}
 
 \item{width}{Width, in cm.}
 
-\item{device}{Device to use. Can either be a device function (e.g. png), or one of "eps", "ps", "tex" (pictex), "pdf", "jpeg", "tiff", "png", "bmp", "svg" or "wmf" (windows only).}
+\item{device}{Device to use. Can either be a device function (e.g. png), or one
+of "eps", "ps", "tex" (pictex), "pdf", "jpeg", "tiff", "png", "bmp", "svg" or "wmf" (windows only).}
 
 \item{family}{Font to use in the graphs, defaults to Spline Sans.}
 }

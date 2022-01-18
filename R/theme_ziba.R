@@ -1,11 +1,7 @@
 #' @importFrom grDevices pdfFonts
-.onAttach <- function(libname, pkgname) {
+.onAttach <- function(libname, pkgname) { # nolint
   ## Load all fonts
   extrafont::loadfonts(quiet = TRUE)
-  if (.Platform$OS.type == "windows") {
-    windowsFonts <- grDevices::windowsFonts
-    extrafont::loadfonts("win", quiet = TRUE)
-  }
 }
 
 
@@ -162,9 +158,11 @@ theme_ziba_ridges <- function(font_family = "Spline Sans") {
 #'
 #' @param filename File name to create on disk.
 #' @param plt Plot to save, defaults to last plot displayed.
-#' @param path Path of the directory to save plot to: path and filename are combined to create the fully qualified file name. Defaults to the working directory.
+#' @param path Path of the directory to save plot to: path and filename are
+#' combined to create the fully qualified file name. Defaults to the working directory.
 #' @param width Width, in cm.
-#' @param device Device to use. Can either be a device function (e.g. png), or one of "eps", "ps", "tex" (pictex), "pdf", "jpeg", "tiff", "png", "bmp", "svg" or "wmf" (windows only).
+#' @param device Device to use. Can either be a device function (e.g. png), or one
+#' of "eps", "ps", "tex" (pictex), "pdf", "jpeg", "tiff", "png", "bmp", "svg" or "wmf" (windows only).
 #' @param family Font to use in the graphs, defaults to Spline Sans.
 #'
 #' @import ggplot2
