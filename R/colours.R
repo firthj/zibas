@@ -79,5 +79,6 @@ zibared <- function() "#d62828"
 
 #' @export
 zibagray <- function() "gray60"
+
 #' @export
 zibadarkgray <- function() "gray30"
