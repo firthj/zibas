@@ -4,10 +4,10 @@
 \alias{theme_ziba_ridges}
 \title{Ziba theme for ridge plots}
 \usage{
-theme_ziba_ridges(font_family = "Spline Sans")
+theme_ziba_ridges(font_family = "Roboto")
 }
 \arguments{
-\item{font_family}{Font to use in the graphs, defaults to Spline Sans.}
+\item{font_family}{Font to use in the graphs, defaults to Roboto.}
 }
 \value{
 A ggplot2 theme

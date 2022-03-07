@@ -19,4 +19,6 @@ Imports:
     ggplot2,
     RColorBrewer,
     grid,
-    grDevices
+    grDevices,
+    stringr,
+    ragg

@@ -6,12 +6,6 @@
 \usage{
 zibablue()
 }
-\value{
-a colour in hexidecimal format
-}
 \description{
 Returns standard ziba blue for consistency
-}
-\examples{
-# ADD_EXAMPLES_HERE
 }

@@ -6,12 +6,6 @@
 \usage{
 zibared()
 }
-\value{
-a colour in hexidecimal format
-}
 \description{
 Returns standard ziba red for consistency
-}
-\examples{
-# ADD_EXAMPLES_HERE
 }

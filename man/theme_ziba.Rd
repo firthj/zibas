@@ -4,10 +4,10 @@
 \alias{theme_ziba}
 \title{Ziba Theme}
 \usage{
-theme_ziba(font_family = "Spline Sans")
+theme_ziba(font_family = "Source Sans Pro")
 }
 \arguments{
-\item{font_family}{Font to use in the graphs, defaults to Spline Sans.}
+\item{font_family}{Font to use in the graphs, defaults to Roboto.}
 }
 \value{
 A ggplot2 theme.

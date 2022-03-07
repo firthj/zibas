@@ -67,10 +67,6 @@ scale_colour_ziba_blue <- function(..., continuous = FALSE) {
 #' Returns standard ziba blue for consistency
 #'
 #' @export
-#'
-#' @return a colour in hexidecimal format
-#' @examples
-#' # ADD_EXAMPLES_HERE
 zibablue <- function() "#023e8a"
 
 
@@ -79,8 +75,9 @@ zibablue <- function() "#023e8a"
 #' Returns standard ziba red for consistency
 #'
 #' @export
-#'
-#' @return a colour in hexidecimal format
-#' @examples
-#' # ADD_EXAMPLES_HERE
 zibared <- function() "#d62828"
+
+#' @export
+zibagray <- function() "gray60"
+#' @export
+zibadarkgray <- function() "gray30"
