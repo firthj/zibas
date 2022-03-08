@@ -11,9 +11,8 @@
 #'
 #'
 #' @return character vector of `n` colours in hexidecimal format.
-#' @examples
-#' # ADD_EXAMPLES_HERE
-blue_gradient <- function(n) {
+#' @export
+ziba_gradient <- function(n) {
   blues <- c(RColorBrewer::brewer.pal(9, "Blues")[3:7], "#023e8a")
   grDevices::colorRampPalette(blues, bias = 1.5, space = "Lab")(n)
 }
