@@ -24,6 +24,8 @@ devtools::install_github("datr-studio/zibas")
 
 ## Usage
 
+### Basic Usage
+
 ``` r
 library(zibas)
 library(ggplot2)
@@ -42,15 +44,6 @@ ggplot(mtcars, aes(hp, mpg, color = cyl, group = cyl)) +
     color = "Cylinders"
   ) +
   theme_ziba()
-#> `geom_smooth()` using method = 'loess' and formula 'y ~ x'
-#> Warning in simpleLoess(y, x, w, span, degree = degree, parametric =
-#> parametric, : pseudoinverse used at 104.65
-#> Warning in simpleLoess(y, x, w, span, degree = degree, parametric =
-#> parametric, : neighborhood radius 18.35
-#> Warning in simpleLoess(y, x, w, span, degree = degree, parametric =
-#> parametric, : reciprocal condition number 5.5839e-17
-#> Warning in simpleLoess(y, x, w, span, degree = degree, parametric =
-#> parametric, : There are other near singularities as well. 4270.6
 ```
 
 <img src="man/figures/README-unnamed-chunk-4-1.png" width="100%" />

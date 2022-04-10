@@ -36,6 +36,8 @@ devtools::install_github("datr-studio/zibas")
 
 ## Usage
 
+### Basic Usage
+
 ```{r }
 library(zibas)
 library(ggplot2)
@@ -43,7 +45,7 @@ library(ggplot2)
 
 Using `zibas` is simple: just add `theme_ziba()` to any ggplot. 
 
-```{r }
+```{r warnings=FALSE}
 ggplot(mtcars, aes(hp, mpg, color = cyl, group = cyl)) +
   geom_point() +
   geom_smooth(se = FALSE) +
