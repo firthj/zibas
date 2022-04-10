@@ -34,9 +34,9 @@ ziba_gradient <- function(n) {
 #' # ADD_EXAMPLES_HERE
 scale_fill_ziba_blue <- function(..., continuous = FALSE) {
   if (continuous) {
-    return(ggplot2::scale_fill_gradientn(..., colours = blue_gradient(256)))
+    return(ggplot2::scale_fill_gradientn(..., colours = ziba_gradient(256)))
   }
-  return(ggplot2::discrete_scale("fill", "zibas_blue", blue_gradient, ...))
+  return(ggplot2::discrete_scale("fill", "zibas_blue", ziba_gradient, ...))
 }
 
 #' A Beautiful blue colour gradient for ggplots
@@ -50,13 +50,11 @@ scale_fill_ziba_blue <- function(..., continuous = FALSE) {
 #' @export
 #'
 #' @return A ggplot
-#' @examples
-#' # ADD_EXAMPLES_HERE
 scale_colour_ziba_blue <- function(..., continuous = FALSE) {
   if (continuous) {
-    return(ggplot2::scale_colour_gradientn(..., colours = blue_gradient(256)))
+    return(ggplot2::scale_colour_gradientn(..., colours = ziba_gradient(256)))
   }
-  return(ggplot2::discrete_scale("colour", "zibas_blue", blue_gradient, ...))
+  return(ggplot2::discrete_scale("colour", "zibas_blue", ziba_gradient, ...))
 }
 
 
