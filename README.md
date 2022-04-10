@@ -7,7 +7,9 @@
 <!-- badges: end -->
 
 The goal of `zibas` is to make it easy to consistently create beautiful
-graphs. The inspiration for this package comes from the brilliant book
+graphs.
+
+The inspiration for this package comes from the brilliant book
 *Storytelling with Data* by Cole Nussbaumer Knaflic.
 
 ## Installation
