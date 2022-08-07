@@ -80,7 +80,7 @@ theme_ziba <- function(font_family = "Source Sans Pro") {
         hjust = 0.95
       ),
       axis.text = ggplot2::element_text(size = 10, colour = "gray40"),
-      legend.title = ggplot2::element_text(size = 12, colour = "gray40"),
+      legend.title = ggplot2::element_blank(),
       legend.text = ggplot2::element_text(size = 10, colour = "gray40"),
       strip.text = ggplot2::element_text(
         size = 12, colour = "gray40",
