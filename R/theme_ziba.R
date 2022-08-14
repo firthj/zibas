@@ -58,33 +58,33 @@ theme_ziba <- function(font_family = "Source Sans Pro") {
 
       # modify the bottom margins of the title and subtitle
       plot.title = ggplot2::element_text(
-        size = 18, colour = "gray30",
+        size = 26, colour = "gray30",
         hjust = 0,
         margin = ggplot2::margin(b = 10, t = 5)
       ),
       plot.subtitle = ggplot2::element_text(
-        size = 12, colour = "grey50",
+        size = 18, colour = "grey50",
         hjust = 0.003,
         margin = ggplot2::margin(b = 10)
       ),
 
       # add padding to the caption
       plot.caption = ggplot2::element_text(
-        size = 10, colour = "grey60",
+        size = 14, colour = "grey60",
         hjust = 1,
         margin = ggplot2::margin(t = 15)
       ),
 
       # Adjust text size and axis title position
       axis.title = ggplot2::element_text(
-        size = 13, colour = "gray30",
+        size = 16, colour = "gray30",
         hjust = 0.95
       ),
-      axis.text = ggplot2::element_text(size = 10, colour = "gray40"),
+      axis.text = ggplot2::element_text(size = 12, colour = "gray40"),
       legend.title = ggplot2::element_blank(),
-      legend.text = ggplot2::element_text(size = 10, colour = "gray40"),
+      legend.text = ggplot2::element_text(size = 12, colour = "gray40"),
       strip.text = ggplot2::element_text(
-        size = 12, colour = "gray40",
+        size = 14, colour = "gray40",
         margin = ggplot2::margin(
           10, 10,
           10, 10,
@@ -121,12 +121,12 @@ theme_ziba_ridges <- function(font_family = "Roboto") {
 
       # modify the bottom margins of the title and subtitle
       plot.title = ggplot2::element_text(
-        size = 18, colour = "#212121",
+        size = 26, colour = "#212121",
         hjust = -0.03,
         margin = ggplot2::margin(b = 10, t = 5)
       ),
       plot.subtitle = ggplot2::element_text(
-        size = 12, colour = "grey40",
+        size = 18, colour = "grey40",
         hjust = -0.01,
         margin = ggplot2::margin(b = 10)
       ),
@@ -134,13 +134,13 @@ theme_ziba_ridges <- function(font_family = "Roboto") {
       axis.line = ggplot2::element_blank(),
 
       # adjust axis to be inline with ridge
-      axis.text.y = element_text(vjust = 0, size = 11),
+      axis.text.y = element_text(vjust = 0, size = 14),
 
       # Make legend smaller to account for plot detail
-      legend.title = ggplot2::element_text(size = 9, colour = "#454545"),
-      legend.text = ggplot2::element_text(size = 8, colour = "#454545"),
+      legend.title = ggplot2::element_text(size = 11, colour = "#454545"),
+      legend.text = ggplot2::element_text(size = 11, colour = "#454545"),
       strip.text = ggplot2::element_text(
-        size = 8, colour = "#454545",
+        size = 11, colour = "#454545",
         margin = ggplot2::margin(
           5, 5,
           5, 5,
