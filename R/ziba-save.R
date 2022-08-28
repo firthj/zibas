@@ -6,7 +6,7 @@
 #'
 #' @param filename desired name of file on disk
 #'
-#' @import ggplot2 stringr ragg
+#' @import ggplot2 stringr ragg cli
 #' @export
 #'
 zibasave <- function(filename,

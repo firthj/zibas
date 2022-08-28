@@ -17,6 +17,3 @@ A ggplot
 \description{
 Blue colour gradient for use in ggplots
 }
-\examples{
-# ADD_EXAMPLES_HERE
-}
