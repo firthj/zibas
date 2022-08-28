@@ -62,11 +62,13 @@ theme_ziba <- function(font_family = "Source Sans Pro") {
         hjust = 0,
         margin = ggplot2::margin(b = 10, t = 5)
       ),
+      plot.title.position = "plot",
       plot.subtitle = ggplot2::element_text(
         size = 18, colour = "grey50",
         hjust = 0.003,
         margin = ggplot2::margin(b = 10)
       ),
+
 
       # add padding to the caption
       plot.caption = ggplot2::element_text(
@@ -125,6 +127,7 @@ theme_ziba_ridges <- function(font_family = "Roboto") {
         hjust = -0.03,
         margin = ggplot2::margin(b = 10, t = 5)
       ),
+      plot.title.position = "plot",
       plot.subtitle = ggplot2::element_text(
         size = 18, colour = "grey40",
         hjust = -0.01,
