@@ -22,4 +22,5 @@ Imports:
     grDevices,
     stringr,
     ragg,
-    cli
+    cli,
+    scales

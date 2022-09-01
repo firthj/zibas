@@ -44,12 +44,12 @@ theme_ziba <- function(font_family = "Source Sans Pro") {
       legend.position = "bottom",
 
       # add light, dotted major grid lines only
-      # panel.grid.major = ggplot2::element_line(
-      #   linetype = "dotted",
-      #   colour = "grey60",
-      #   size = 0.2
-      # ),
-      panel.grid.major = ggplot2::element_blank(),
+      panel.grid.major.y = ggplot2::element_line(
+        linetype = "dotted",
+        colour = "grey60",
+        size = 0.2
+      ),
+      panel.grid.major.x = ggplot2::element_blank(),
       panel.grid.minor = ggplot2::element_blank(),
 
       # remove the axis tick marks and hide axis lines
@@ -72,7 +72,7 @@ theme_ziba <- function(font_family = "Source Sans Pro") {
 
       # add padding to the caption
       plot.caption = ggplot2::element_text(
-        size = 14, colour = "grey60",
+        size = 11, colour = "grey60",
         hjust = 1,
         margin = ggplot2::margin(t = 15)
       ),
