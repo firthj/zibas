@@ -7,4 +7,4 @@ mtcars %>%
   ggplot(aes(hp, mpg * 100)) +
   geom_point() +
   labs(title = "soemthing") +
-  scale_y_number(1e9)
+  scale_y_dollar(1e3)

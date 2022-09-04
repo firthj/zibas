@@ -4,11 +4,17 @@
 \alias{num_scale}
 \alias{scale_y_number}
 \alias{scale_x_number}
+\alias{scale_x_dollar}
+\alias{scale_y_dollar}
 \title{Easy number scales.}
 \usage{
 scale_y_number(scale = 1, ...)
 
 scale_x_number(scale = 1, ...)
+
+scale_x_dollar(scale = 1)
+
+scale_y_dollar(scale = 1)
 }
 \arguments{
 \item{scale}{Shorthand number in scientific format, must be either 1, 1e3,1e6, or 1e9 to be recognised. Will be inverted in the scale (1/1e3).}

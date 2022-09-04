@@ -49,6 +49,50 @@ scale_x_number <- function(scale = 1, ...) {
   )
 }
 
+#' @rdname num_scale
+#' @export
+scale_x_dollar <- function(scale = 1, ...) {
+  if (scale / 1e3 == 1) {
+    suffix <- "k"
+  } else if (scale / 1e6 == 1) {
+    suffix <- "M"
+  } else if (scale / 1e9 == 1) {
+    suffix <- "B"
+  } else {
+    suffix <- ""
+  }
+  ggplot2::scale_x_continuous(...,
+    labels = scales::number_format(
+      scale = 1 / scale,
+      prefix = "$",
+      suffix = suffix,
+      big.mark = ","
+    )
+  )
+}
+
+#' @rdname num_scale
+#' @export
+scale_y_dollar <- function(scale = 1, ...) {
+  if (scale / 1e3 == 1) {
+    suffix <- "k"
+  } else if (scale / 1e6 == 1) {
+    suffix <- "M"
+  } else if (scale / 1e9 == 1) {
+    suffix <- "B"
+  } else {
+    suffix <- ""
+  }
+  ggplot2::scale_y_continuous(...,
+    labels = scales::number_format(
+      scale = 1 / scale,
+      prefix = "$",
+      suffix = suffix,
+      big.mark = ","
+    )
+  )
+}
+
 #' @importFrom scales percent_format
 #' @export
 scale_y_percent <- function(...) {

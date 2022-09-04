@@ -30,4 +30,12 @@ no_clip <- function() coord_cartesian(clip = "off")
 flip <- function(...) coord_flip(...)
 
 #' @export
-no_axis_labs = function() labs(x="", y ="")
+no_axis_labs <- function() labs(x = "", y = "")
+
+#' @export
+no_leg <- function() theme(legend.position = "none")
+
+#' @export
+quick_labs <- function(title, subtitle = "") {
+  labs(x = "", y = "", title = title, subtitle = subtitle)
+}
