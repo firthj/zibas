@@ -98,6 +98,7 @@ theme_ziba <- function(font_family = "Source Sans Pro") {
 }
 
 
+
 #' Ziba theme for ridge plots
 #'
 #' Ridge plots require a different offset for y axis labels, and look better with lighter grid lines.
@@ -110,7 +111,7 @@ theme_ziba <- function(font_family = "Source Sans Pro") {
 #' @return A ggplot2 theme
 #' @examples
 #' # ADD_EXAMPLES_HERE
-theme_ziba_ridges <- function(font_family = "Roboto") {
+theme_ziba_ridges <- function(font_family = "Source Sans Pro") {
   ggplot2::`%+replace%`(
     theme_ziba(font_family),
     ggplot2::theme(

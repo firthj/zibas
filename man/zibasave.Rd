@@ -4,10 +4,21 @@
 \alias{zibasave}
 \title{Save your Zibas plot}
 \usage{
-zibasave(filename, plt = ggplot2::last_plot(), path = ".", pdf = FALSE, ...)
+zibasave(
+  filename = NULL,
+  plt = ggplot2::last_plot(),
+  path = ".",
+  pdf = FALSE,
+  bg = "white",
+  ...
+)
 }
 \arguments{
-\item{filename}{desired name of file on disk}
+\item{filename}{desired name of file on disk. If NULL, defaults to plot title, if there is one, otherwise "figure\%03d".}
+
+\item{plt}{The plot to print, defaults to last plot}
+
+\item{pdf}{Use pdf format instead of default png}
 }
 \description{
 Wrapper for ggplot2's save function with presets that work with the font family.
