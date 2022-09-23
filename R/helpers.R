@@ -54,3 +54,12 @@ set_colours <- function(colour_vector, ...) {
 set_fills <- function(colour_vector, ...) {
   scale_fill_manual(..., values = colour_vector)
 }
+
+#' @export
+rev_major_lines <- function() {
+  theme(panel.grid.major.x = ggplot2::element_line(
+    linetype = "dotted",
+    colour = "grey60",
+    size = 0.2
+  ), panel.grid.major.y = ggplot2::element_blank())
+}

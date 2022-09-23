@@ -52,6 +52,7 @@ theme_ziba <- function(font_family = "Source Sans Pro") {
       panel.grid.major.x = ggplot2::element_blank(),
       panel.grid.minor = ggplot2::element_blank(),
 
+
       # remove the axis tick marks and hide axis lines
       axis.ticks = ggplot2::element_blank(),
       axis.line = ggplot2::element_line(color = "gray60", size = 0.3),
@@ -92,11 +93,10 @@ theme_ziba <- function(font_family = "Source Sans Pro") {
           10, 10,
           "pt"
         )
-      )
+      ),
     )
   )
 }
-
 
 
 #' Ziba theme for ridge plots

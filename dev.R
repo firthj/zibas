@@ -13,8 +13,7 @@ mtcars %>%
   geom_point() +
   scale_y_dollar(1e3) +
   ggtitle("Plot 1") +
-  labs(caption = "Test caption") +
-  extend_right(2)
+  labs(caption = "Test caption")
 
 
 
