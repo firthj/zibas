@@ -63,3 +63,8 @@ rev_major_lines <- function() {
     size = 0.2
   ), panel.grid.major.y = ggplot2::element_blank())
 }
+
+#' @export
+set_legend_rows <- function(rows) {
+  guides(colour = guide_legend(nrow = rows))
+}

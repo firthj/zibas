@@ -24,7 +24,7 @@ theme_ziba <- function(font_family = "Source Sans Pro") {
     ggplot2::theme_grey(base_size = 11.5, base_family = font_family),
     ggplot2::theme(
       # add padding to the plot
-      plot.margin = grid::unit(c(0.5, 1.5, 0.5, 0.5), "cm"),
+      plot.margin = grid::unit(c(0.4, 0.6, 0.4, 0.4), "cm"),
 
       # remove the plot background and border
       plot.background = ggplot2::element_rect(fill = "white", colour = NA),
@@ -38,7 +38,7 @@ theme_ziba <- function(font_family = "Source Sans Pro") {
       ),
       legend.key = ggplot2::element_rect(fill = "transparent", colour = NA),
       strip.background = ggplot2::element_rect(
-        fill = "transparent",
+        fill = "red",
         colour = NA
       ),
       legend.position = "bottom",

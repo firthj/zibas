@@ -12,7 +12,7 @@
 #' @export
 #'
 zibasave <- function(filename = NULL,
-                     plt = ggplot2::last_plot(), path = ".",
+                     plot = ggplot2::last_plot(), path = ".",
                      pdf = FALSE,
                      bg = "white", ...) {
   width <- 10
@@ -37,15 +37,15 @@ zibasave <- function(filename = NULL,
 
 
   plt <- plt + theme(
-    plot.background = element_rect(fill = bg),
-    panel.background = element_rect(fill = bg)
+    plot.background = element_rect(fill = bg, colour = NA),
+    panel.background = element_rect(fill = bg, colour = NA)
   )
 
 
   ggplot2::ggsave(
     paste0(filename, ext),
     device = device,
-    plot = plt,
+    plot = plot,
     path = path,
     width = width,
     height = width / 1.618,
