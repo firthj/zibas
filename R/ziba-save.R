@@ -5,7 +5,7 @@
 #' Wrapper for ggplot2's save function with presets that work with the font family.
 #'
 #' @param filename desired name of file on disk. If NULL, defaults to plot title, if there is one, otherwise "figure%03d".
-#' @param plt The plot to print, defaults to last plot
+#' @param plot The plot to print, defaults to last plot
 #' @param pdf Use pdf format instead of default png
 #'
 #' @import ggplot2 stringr cli
@@ -14,11 +14,11 @@
 zibasave <- function(filename = NULL,
                      plot = ggplot2::last_plot(), path = ".",
                      pdf = FALSE,
-                     bg = "white", ...) {
+                     bg = "white") {
   width <- 10
   if (is.null(filename)) {
-    if (!is.null(plt$labels$title)) {
-      filename <- plt$labels$title
+    if (!is.null(plot$labels$title)) {
+      filename <- plot$labels$title
     } else {
       filename <- paste0("figure-saved-", Sys.time())
     }
@@ -36,7 +36,7 @@ zibasave <- function(filename = NULL,
   }
 
 
-  plt <- plt + theme(
+  plot <- plot + theme(
     plot.background = element_rect(fill = bg, colour = NA),
     panel.background = element_rect(fill = bg, colour = NA)
   )
@@ -49,7 +49,6 @@ zibasave <- function(filename = NULL,
     path = path,
     width = width,
     height = width / 1.618,
-    units = "in",
-    ...
+    units = "in"
   )
 }
