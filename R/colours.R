@@ -1,4 +1,3 @@
-
 #' Create a blue gradient
 #'
 #' Extends RColorBrewer with functionality for more than 9 shades of blue.
@@ -79,3 +78,6 @@ zibagray <- function() "gray60"
 
 #' @export
 zibadarkgray <- function() "gray30"
+
+#' @export
+zibagreen <- function() "#36AE93"

@@ -40,8 +40,8 @@ no_axis_labs <- function() labs(x = "", y = "")
 no_leg <- function() theme(legend.position = "none")
 
 #' @export
-quick_labs <- function(title, subtitle = "") {
-  labs(x = "", y = "", title = title, subtitle = subtitle)
+quick_labs <- function(title, subtitle = "", x = "", y = "") {
+  labs(x = x, y = y, title = title, subtitle = subtitle)
 }
 
 
