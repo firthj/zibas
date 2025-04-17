@@ -68,3 +68,5 @@ rev_major_lines <- function() {
 set_legend_rows <- function(rows) {
   guides(colour = guide_legend(nrow = rows))
 }
+
+str_ext <- function(x, y) regmatches(x, regexpr(y, x))

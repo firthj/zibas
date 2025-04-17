@@ -4,7 +4,7 @@
 \alias{theme_ziba_ridges}
 \title{Ziba theme for ridge plots}
 \usage{
-theme_ziba_ridges(font_family = "Source Sans Pro")
+theme_ziba_ridges(font_family = "Segoe UI")
 }
 \arguments{
 \item{font_family}{Font to use in the graphs, defaults to Roboto.}

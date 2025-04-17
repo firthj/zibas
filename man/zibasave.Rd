@@ -6,18 +6,33 @@
 \usage{
 zibasave(
   filename = NULL,
-  plot = ggplot2::last_plot(),
   path = ".",
-  pdf = FALSE,
-  bg = "white"
+  height = 6.5,
+  plt = ggplot2::last_plot(),
+  r = 0.8,
+  cr = 1,
+  bg = "transparent",
+  ...
 )
 }
 \arguments{
 \item{filename}{desired name of file on disk. If NULL, defaults to plot title, if there is one, otherwise "figure\%03d".}
 
+\item{path}{The path to save the file to}
+
+\item{height}{The height of the plot}
+
+\item{r}{The right margin of the plot}
+
+\item{cr}{The right margin of the caption}
+
+\item{bg}{The background color of the plot}
+
+\item{...}{Additional arguments to pass to ggsave}
+
 \item{plot}{The plot to print, defaults to last plot}
 
-\item{pdf}{Use pdf format instead of default png}
+\item{width}{The width of the plot}
 }
 \description{
 Wrapper for ggplot2's save function with presets that work with the font family.

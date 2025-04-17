@@ -1,16 +1,23 @@
+.state <- new.env(parent = emptyenv())
+.state$colour <- "gray30"
+
 #' @importFrom grDevices pdfFonts
 .onAttach <- function(libname, pkgname) { # nolint
   ## Load all fonts
   extrafont::loadfonts(quiet = TRUE)
 }
 
+#' @export
+set_plot_title_colour <- function(col) {
+  .state$colour <- col
+}
 
 
 #' Ziba Theme
 #'
 #' Good looking, based on principles from 'Storytelling with data'.
 #'
-#' @param font_family Font to use in the graphs, defaults to Roboto.
+#' @param font_family Font to use in the graphs, defaults to Segoe UI
 #'
 #' @import ggplot2
 #'
@@ -19,7 +26,7 @@
 #' @export
 #'
 #' @return A ggplot2 theme.
-theme_ziba <- function(font_family = "Source Sans Pro") {
+theme_ziba <- function(font_family = "Segoe UI") {
   ggplot2::`%+replace%`(
     ggplot2::theme_grey(base_size = 11.5, base_family = font_family),
     ggplot2::theme(
@@ -59,15 +66,15 @@ theme_ziba <- function(font_family = "Source Sans Pro") {
 
       # modify the bottom margins of the title and subtitle
       plot.title = ggplot2::element_text(
-        size = 26, colour = "gray30",
-        hjust = 0,
-        margin = ggplot2::margin(b = 10, t = 5)
+        size = 30, colour = .state$colour,
+        hjust = 0, face = "bold", family = "Segoe UI",
+        margin = ggplot2::margin(l = 10, b = 10, t = 5)
       ),
       plot.title.position = "plot",
       plot.subtitle = ggplot2::element_text(
-        size = 18, colour = "grey50",
-        hjust = 0.003,
-        margin = ggplot2::margin(b = 10)
+        size = 22, colour = "grey50",
+        hjust = 0,
+        margin = ggplot2::margin(l = 10, b = 10)
       ),
 
 
@@ -111,7 +118,7 @@ theme_ziba <- function(font_family = "Source Sans Pro") {
 #' @return A ggplot2 theme
 #' @examples
 #' # ADD_EXAMPLES_HERE
-theme_ziba_ridges <- function(font_family = "Source Sans Pro") {
+theme_ziba_ridges <- function(font_family = "Segoe UI") {
   ggplot2::`%+replace%`(
     theme_ziba(font_family),
     ggplot2::theme(
@@ -124,15 +131,15 @@ theme_ziba_ridges <- function(font_family = "Source Sans Pro") {
 
       # modify the bottom margins of the title and subtitle
       plot.title = ggplot2::element_text(
-        size = 26, colour = "#212121",
-        hjust = -0.03,
-        margin = ggplot2::margin(b = 10, t = 5)
+        size = 18, colour = "grey40",
+        hjust = 0, family = "Segoe UI",
+        margin = ggplot2::margin(l = 10, b = 10)
       ),
       plot.title.position = "plot",
       plot.subtitle = ggplot2::element_text(
         size = 18, colour = "grey40",
-        hjust = -0.01,
-        margin = ggplot2::margin(b = 10)
+        hjust = 0, family = "Segoe UI",
+        margin = ggplot2::margin(l = 10, b = 10)
       ),
       # remove the axis lines
       axis.line = ggplot2::element_blank(),
