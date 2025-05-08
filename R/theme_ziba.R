@@ -62,7 +62,7 @@ theme_ziba <- function(font_family = "Segoe UI") {
 
       # remove the axis tick marks and hide axis lines
       axis.ticks = ggplot2::element_blank(),
-      axis.line = ggplot2::element_line(color = "gray60", size = 0.3),
+      axis.line = ggplot2::element_blank(),
 
       # modify the bottom margins of the title and subtitle
       plot.title = ggplot2::element_text(

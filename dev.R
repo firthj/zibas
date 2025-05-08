@@ -21,4 +21,5 @@ map_df(letters[1:max_cols], ~ {
   geom_line() +
   labs(title = glue("Test {test}"), subtitle = "A visual test") +
   theme_ziba() +
-  no_leg()
+  no_leg() +
+  add_axis()
