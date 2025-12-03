@@ -22,4 +22,4 @@ map_df(letters[1:max_cols], ~ {
   labs(title = glue("Test {test}"), subtitle = "A visual test") +
   theme_ziba() +
   no_leg() +
-  add_axis()
+  add_axis("x")

@@ -71,11 +71,11 @@ str_ext <- function(x, y) regmatches(x, regexpr(y, x))
 #' @export
 add_axis <- function(axis = "both") {
   if (axis == "x") {
-    theme(axis.line.x = ggplot2::element_line(color = "gray60", size = 0.3))
+    theme(axis.line.x = ggplot2::element_line(color = "gray60", size = 0.8))
   } else if (axis == "y") {
-    theme(axis.line.y = ggplot2::element_line(color = "gray60", size = 0.3))
+    theme(axis.line.y = ggplot2::element_line(color = "gray60", size = 0.8))
   } else if (axis == "both") {
-    theme(axis.line = ggplot2::element_line(color = "gray60", size = 0.3))
+    theme(axis.line = ggplot2::element_line(color = "gray60", size = 0.8))
   } else {
     stop("unknown axis or axis not specified.")
   }
