@@ -1,84 +1,362 @@
 
-<!-- README.md is generated from README.Rmd. Please edit that file -->
+<!-- README.md is generated from README.Rmd. Please edit this file, then run devtools::build_readme(). -->
 
-# zibas
+# ziba
 
 <!-- badges: start -->
+
 <!-- badges: end -->
 
-The goal of `zibas` is to make it easy to consistently create beautiful
-graphs.
-
-The inspiration for this package comes from the brilliant book
-*Storytelling with Data* by Cole Nussbaumer Knaflic.
+ziba gives ggplot2 a clean, consistent house style. The design follows
+the principles in Cole Nussbaumer Knaflic’s *Storytelling with Data*:
+strip away chart junk, mute everything that is not data, and let the
+title tell the reader what to look for. The package sets the Matter
+typeface to match the Transpower brand, manages colours from one
+session-wide store, and saves charts at export-ready sizes in PNG or
+SVG.
 
 ## Installation
 
-You can install the development version of zibas from
-[GitHub](https://github.com/) with:
+ziba needs R 4.1 or later and ggplot2 4.0.0 or later. Install it from
+the package repository:
 
 ``` r
-# install.packages("devtools")
-devtools::install_github("datr-studio/zibas")
+# install.packages("remotes")
+remotes::install_gitlab("<group>/ziba", host = "<gitlab-host>")
 ```
 
-## Usage
-
-### Basic Usage
+ziba renders fonts through the modern graphics stack, so you should also
+install the devices it uses for export:
 
 ``` r
-library(zibas)
+install.packages(c("ragg", "svglite"))
+```
+
+## Setting up the Matter font
+
+ziba reads fonts straight from your operating system through
+`systemfonts`, so Matter needs no import or registration step. You only
+need the font installed on the machine. Check that R can see it:
+
+``` r
+systemfonts::system_fonts() |>
+  subset(grepl("Matter", family), select = c(family, style, weight, path))
+```
+
+The output should list Matter with a Bold style, because the chart title
+uses bold. If Matter is missing, ziba warns once per session and falls
+back to the system sans-serif font, so your code still runs.
+
+To see Matter on screen, your graphics device must also read system
+fonts:
+
+- **RStudio:** set Tools → Global Options → General → Graphics → Backend
+  to **AGG**.
+- **R Markdown and Quarto:** add
+  `knitr::opts_chunk$set(dev = "ragg_png")` to the setup chunk.
+- **VS Code:** the httpgd viewer reads system fonts, but it measures
+  text slightly differently from ragg. Treat saved files as the source
+  of truth.
+
+To use a different font, set an option before you activate the theme:
+
+``` r
+options(ziba.font_family = "Segoe UI")
+```
+
+## Quick start
+
+Call `use_ziba_theme()` once at the top of a script or notebook. Every
+plot after that picks up the theme, the colours and single-row legends
+without any further code.
+
+``` r
 library(ggplot2)
-```
+library(zibas)
 
-Using `zibas` is simple: just add `theme_ziba()` to any ggplot.
+use_ziba_theme()
 
-``` r
-ggplot(mtcars, aes(hp, mpg, color = cyl, group = cyl)) +
-  geom_point() +
-  geom_smooth(se = FALSE) +
-  labs(
-    x = "Horsepower", y = "Miles / Gallon",
-    title = "A meaningless graph",
-    subtitle = "Only for the sake of illustration",
-    color = "Cylinders"
+growth <- expand.grid(x = 1:10, series = letters[1:6])
+growth$y <- growth$x^(1 + as.integer(growth$series) / 4)
+
+p <- ggplot(growth, aes(x, y, colour = series)) +
+  geom_line(linewidth = 0.8) +
+  quick_labs(
+    title = "Series f grows fastest",
+    subtitle = "Index value by period",
+    caption = "Source: synthetic test data"
   ) +
-  theme_ziba()
+  no_axis_labs()
+
+p
 ```
 
-<img src="man/figures/README-unnamed-chunk-4-1.png" width="100%" />
+<img src="man/figures/README-quick-start-1.png" width="100%" />
 
-### Ridge plots
+## The theme
 
-If however, you want to do a ridge plot, `theme_ziba_ridges()` is
-recommended, for subtle shifts in the axis location.
+`theme_ziba()` builds on `theme_grey()` and removes everything that
+competes with the data. It drops the panel background, border, axis
+lines, tick marks and minor grid lines. It keeps only light, dotted
+horizontal grid lines, so the reader can still read values. It aligns
+the title and subtitle to the left edge of the whole plot, where the eye
+starts reading, and puts the legend under the chart.
+
+Every text size scales from `base_size`, so one argument resizes the
+whole chart in proportion:
 
 ``` r
-library(ggridges)
-ggplot(lincoln_weather, aes(x = `Mean Temperature [F]`, y = `Month`, fill = stat(x))) +
-  geom_density_ridges_gradient(scale = 3, rel_min_height = 0.01) +
-  scale_x_continuous(expand = c(0, 0)) +
-  scale_y_discrete(expand = c(0, 0)) +
-  scale_fill_viridis_c(name = "Temp. [F]", option = "C") +
-  coord_cartesian(clip = "off") +
-  labs(title = "Temperatures in Lincoln NE in 2016") +
-  theme_ziba_ridges()
-#> Picking joint bandwidth of 3.37
+p + theme_ziba(base_size = 9)   # smaller, e.g. for an A4 report
+p + theme_ziba(base_size = 14)  # larger, e.g. for a slide
 ```
 
-<img src="man/figures/README-unnamed-chunk-5-1.png" width="100%" />
+Use `+ theme_ziba(...)` only for one-off changes. A plot with its own
+`theme_ziba()` keeps the colours and sizes it was built with, while
+plots that rely on the global theme follow later colour changes and
+export sizing.
 
-### Other goodies
+## Colours
 
-In addition to the themes, `zibas` also provides a standard set of
-colours. Following the recommendations of *Storytelling with data*, a
-single blue, red, and two grays are provided, using `zibablue()`,
-`zibared()`, `zibagray()`, and `zibadarkgray()`.
+ziba keeps every colour in one session store. The store holds a small
+brand palette and the colour of each theme role, such as the title, axis
+text and grid lines.
 
-A gradient function also exists using `ziba_gradient()`, which can
-return n colours in the blue spectrum. This is based on the Brewer
-Palette’s blues (`RColorBrewer`), but expands it to an arbitrary number
-(whereas the original is capped at 9 shades).
+``` r
+ziba_colours()
+#>        blue         red       green        gray    darkgray       title 
+#>   "#023e8a"   "#d62828"   "#36AE93"    "gray60"    "gray30"    "gray30" 
+#>    subtitle     caption  axis_title   axis_text legend_text  strip_text 
+#>    "grey50"    "grey60"    "gray30"    "gray40"    "gray40"    "gray40" 
+#>        grid  background 
+#>    "grey60"     "white"
+```
 
-To apply this directly to a ggplot, simply add `scale_fill_ziba_blue()`
-or `scale_colour_ziba_blue()` as you would any other colour scale.
+Read a single colour with `ziba_colour()`:
+
+``` r
+ziba_colour("blue")
+#> [1] "#023e8a"
+```
+
+The original accessors, such as `zibablue()` and `zibared()`, still work
+and read from the same store.
+
+### Change colours for the whole session
+
+`set_ziba_colours()` updates the store. When you have activated the
+theme with `use_ziba_theme()`, the change applies straight away to every
+plot that uses the global theme, including plots you created earlier.
+
+``` r
+old <- set_ziba_colours(title = ziba_colour("blue"), subtitle = "grey40")
+p
+```
+
+<img src="man/figures/README-set-colours-1.png" width="100%" />
+
+`set_ziba_colours()` returns the previous values, so you can restore
+them. `reset_ziba_colours()` restores every package default.
+
+``` r
+set_ziba_colours(old)
+```
+
+Two shortcuts cover the most common change:
+
+``` r
+set_plot_title_colour("#023e8a")
+set_plot_subtitle_colour("grey40")
+```
+
+Colour names are checked, so a typo such as `titel = "red"` fails with a
+list of valid names instead of being silently ignored.
+
+### Override colours for one plot
+
+Pass `colours` to `theme_ziba()` to change a single chart without
+touching the session store:
+
+``` r
+p + theme_ziba(colours = c(title = ziba_colour("red")))
+```
+
+<img src="man/figures/README-override-colours-1.png" width="100%" />
+
+A standard ggplot2 `theme()` call works too, because ggplot2 merges it
+on top of the theme:
+
+``` r
+p + theme(plot.title = element_text(colour = ziba_colour("red")))
+```
+
+### Blue scales
+
+`scale_colour_ziba_blue()` and `scale_fill_ziba_blue()` give a
+sequential blue palette that ends in the current ziba blue. They work
+for discrete data by default and for continuous data with
+`continuous = TRUE`.
+
+``` r
+ggplot(growth, aes(series, y, fill = series)) +
+  geom_col() +
+  scale_fill_ziba_blue() +
+  quick_labs(title = "Totals rise with each series") +
+  no_axis_labs() +
+  no_leg()
+```
+
+<img src="man/figures/README-blue-scale-1.png" width="100%" />
+
+`ziba_gradient(n)` returns the underlying colours if you need them
+elsewhere.
+
+### Your own palettes
+
+`set_colours()` and `set_fills()` wrap the manual scales. Name the
+colours to match your data levels, so each category keeps its colour
+even when some levels are missing from a chart.
+
+``` r
+gen_colours <- c(Wind = "#1B9E77", Solar = "#F8D100", Hydro = "#0359F9")
+
+ggplot(gen, aes(year, gwh, fill = type)) +
+  geom_col() +
+  set_fills(gen_colours)
+```
+
+## Legends
+
+ziba puts the legend under the chart on one row. ggplot2 controls legend
+rows through the guide rather than the theme, so `use_ziba_theme()`
+swaps in default discrete scales that use one row. `set_colours()` and
+`set_fills()` apply the same rule.
+
+Other explicit scales, such as a direct `scale_colour_manual()` call,
+bring their own guide. Add `ziba_legend_rows()` to those charts, or to
+any chart whose legend is too long for one row:
+
+``` r
+p + ziba_legend_rows(2)
+```
+
+`no_leg()` removes the legend entirely.
+
+## Helpers
+
+ziba includes short helpers for the changes you make most often.
+
+| Helper | What it does |
+|----|----|
+| `quick_labs()` | Sets the title, subtitle, axis titles and caption in one call. Labels you leave out keep their current value. |
+| `no_axis_labs()` | Removes both axis titles and frees their space. |
+| `no_leg()` | Hides the legend. |
+| `flip()` | Flips the axes and moves the grid lines to the value axis. |
+| `rev_major_lines()` | Moves the dotted grid lines to the x axis. |
+| `extend_right()` | Widens the right margin to make room for direct labels. |
+| `no_clip()` | Lets text and points draw outside the panel. |
+| `set_colours()`, `set_fills()` | Applies a manual palette with a single-row legend. |
+| `ziba_legend_rows()` | Sets the number of legend rows. |
+
+### Label lines directly
+
+*Storytelling with Data* recommends labelling lines at their ends
+instead of using a legend, because the reader no longer has to look back
+and forth. `extend_right()` makes room for the labels, and `no_clip()`
+lets them draw into that space:
+
+``` r
+ends <- subset(growth, x == max(x))
+
+p +
+  geom_text(
+    data = ends,
+    aes(label = series),
+    hjust = 0, nudge_x = 0.15
+  ) +
+  extend_right(1) +
+  no_clip() +
+  no_leg()
+```
+
+<img src="man/figures/README-direct-labels-1.png" width="100%" />
+
+### Horizontal bars
+
+`flip()` turns a column chart into a bar chart. Long category names are
+easier to read that way. The grid lines move with the value axis
+automatically.
+
+``` r
+ggplot(ends, aes(reorder(series, y), y)) +
+  geom_col(fill = ziba_colour("blue")) +
+  flip() +
+  quick_labs(title = "Series f ends highest") +
+  no_axis_labs()
+```
+
+<img src="man/figures/README-flip-1.png" width="100%" />
+
+## Saving charts
+
+`ziba_save()` exports a chart at a consistent size. It saves PNG by
+default, with the plot title as the file name:
+
+``` r
+p |> ziba_save(path = "export/charts")
+```
+
+During the save, `ziba_save()` swaps in a smaller theme with
+`base_size = 8`, so text stays in proportion to the exported size. It
+then restores your on-screen theme. Any `+ theme()` changes you added to
+the plot still apply.
+
+Common options:
+
+``` r
+# save SVG, or both formats at once
+p |> ziba_save("northland-upgrades", format = "svg")
+p |> ziba_save("northland-upgrades", format = c("png", "svg"))
+
+# change the size; height follows a 16:9 ratio unless you set it
+p |> ziba_save(width = 6.3)                 # A4 body width
+p |> ziba_save(width = 6.3, aspect = 4 / 3) # taller chart
+p |> ziba_save(width = 8, height = 6)       # exact size
+
+# keep a white background instead of a transparent one
+p |> ziba_save(bg = NULL)
+```
+
+### SVG and PowerPoint
+
+By default, SVG files store text as text. That keeps the text editable
+in PowerPoint, but anyone who opens the file without Matter installed
+sees a substitute font. For decks that other people will open, convert
+the text to outlines:
+
+``` r
+p |> ziba_save("northland-upgrades", format = "svg", outline_text = TRUE)
+```
+
+The font then looks the same on every machine, but you can no longer
+edit the text.
+
+### File names
+
+Without a `filename`, `ziba_save()` turns the plot title into a short
+file name, or uses the next free `figureNNN` when the plot has no title.
+Two plots with the same title overwrite each other, so pass an explicit
+`filename` for anything you publish.
+
+## Function reference
+
+| Area | Functions |
+|----|----|
+| Theme | `theme_ziba()`, `use_ziba_theme()`, `make_beautiful_plots()` |
+| Colours | `ziba_colours()`, `ziba_colour()`, `set_ziba_colours()`, `reset_ziba_colours()`, `set_plot_title_colour()`, `set_plot_subtitle_colour()` |
+| Palettes | `ziba_gradient()`, `scale_colour_ziba_blue()`, `scale_fill_ziba_blue()`, `set_colours()`, `set_fills()` |
+| Legacy colours | `zibablue()`, `zibared()`, `zibagreen()`, `zibagray()`, `zibadarkgray()` |
+| Legends | `ziba_legend_rows()`, `set_legend_rows()`, `no_leg()` |
+| Layout | `quick_labs()`, `no_axis_labs()`, `flip()`, `rev_major_lines()`, `extend_right()`, `no_clip()` |
+| Export | `ziba_save()` |
+
+Run `help(package = "ziba")` for full documentation of each function.

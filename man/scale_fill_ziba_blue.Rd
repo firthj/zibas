@@ -2,21 +2,18 @@
 % Please edit documentation in R/colours.R
 \name{scale_fill_ziba_blue}
 \alias{scale_fill_ziba_blue}
-\title{A Beautiful blue fill gradient for ggplots}
+\title{Blue fill gradient for ggplots}
 \usage{
 scale_fill_ziba_blue(..., continuous = FALSE)
 }
 \arguments{
-\item{...}{All the usual parameters that apply to a fill scale.}
+\item{...}{Other arguments passed to the underlying fill scale.}
 
 \item{continuous}{Whether the data is continuous or discrete.}
 }
 \value{
-A ggplot
+A ggplot2 scale.
 }
 \description{
-Blue fill gradient for use in ggplots
-}
-\examples{
-# ADD_EXAMPLES_HERE
+Blue fill gradient for ggplots
 }

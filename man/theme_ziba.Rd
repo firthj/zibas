@@ -4,14 +4,26 @@
 \alias{theme_ziba}
 \title{Ziba Theme}
 \usage{
-theme_ziba(font_family = "Segoe UI")
+theme_ziba(
+  base_size = 11.5,
+  font_family = getOption("ziba.font_family", "Matter"),
+  colours = NULL
+)
 }
 \arguments{
-\item{font_family}{Font to use in the graphs, defaults to Segoe UI}
+\item{base_size}{Base font size in pts; all other text scales from this.}
+
+\item{font_family}{Font to use in the graphs. Defaults to the
+\code{ziba.font_family} option, or "Matter" if unset.}
+
+\item{colours}{Optional named vector or list of colour overrides for this
+theme only, e.g. \code{c(title = "red")}. Names must match \code{ziba_colours()}.}
 }
 \value{
 A ggplot2 theme.
 }
 \description{
-Good looking, based on principles from 'Storytelling with data'.
+Good looking, based on principles from 'Storytelling with data'. Colours
+come from the session store (see \code{set_ziba_colours()}), and \code{colours}
+overrides them for a single plot.
 }

@@ -2,18 +2,18 @@
 % Please edit documentation in R/colours.R
 \name{scale_colour_ziba_blue}
 \alias{scale_colour_ziba_blue}
-\title{A Beautiful blue colour gradient for ggplots}
+\title{Blue colour gradient for ggplots}
 \usage{
 scale_colour_ziba_blue(..., continuous = FALSE)
 }
 \arguments{
-\item{...}{All the usual parameters that apply to a colour scale.}
+\item{...}{Other arguments passed to the underlying colour scale.}
 
 \item{continuous}{Whether the data is continuous or discrete.}
 }
 \value{
-A ggplot
+A ggplot2 scale.
 }
 \description{
-Blue colour gradient for use in ggplots
+Blue colour gradient for ggplots
 }

@@ -7,11 +7,12 @@
 ziba_gradient(n)
 }
 \arguments{
-\item{n}{number of shades.}
+\item{n}{Number of shades.}
 }
 \value{
-character vector of \code{n} colours in hexidecimal format.
+Character vector of \code{n} hex colours.
 }
 \description{
-Extends RColorBrewer with functionality for more than 9 shades of blue.
+Extends RColorBrewer with more than 9 shades of blue. The darkest shade is
+the current ziba "blue", so it follows \code{set_ziba_colours(blue = ...)}.
 }

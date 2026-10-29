@@ -4,23 +4,81 @@
 \alias{num_scale}
 \alias{scale_y_number}
 \alias{scale_x_number}
-\alias{scale_x_dollar}
 \alias{scale_y_dollar}
-\title{Easy number scales.}
+\alias{scale_x_dollar}
+\title{Easy number scales}
 \usage{
-scale_y_number(scale = 1, ...)
+scale_y_number(
+  scale = 1,
+  ...,
+  suffix = NULL,
+  prefix = "",
+  big.mark = " ",
+  accuracy = NULL
+)
 
-scale_x_number(scale = 1, ...)
+scale_x_number(
+  scale = 1,
+  ...,
+  suffix = NULL,
+  prefix = "",
+  big.mark = " ",
+  accuracy = NULL
+)
 
-scale_x_dollar(scale = 1, ...)
+scale_y_dollar(
+  scale = 1,
+  ...,
+  suffix = NULL,
+  prefix = "$",
+  big.mark = " ",
+  accuracy = NULL
+)
 
-scale_y_dollar(scale = 1, ...)
+scale_x_dollar(
+  scale = 1,
+  ...,
+  suffix = NULL,
+  prefix = "$",
+  big.mark = " ",
+  accuracy = NULL
+)
 }
 \arguments{
-\item{scale}{Shorthand number in scientific format, must be either 1, 1e3,1e6, or 1e9 to be recognised. Will be inverted in the scale (1/1e3).}
+\item{scale}{Divisor for the axis values. 1, 1e3, 1e6 and 1e9 get the
+suffixes "", "k", "M" and "B". Any other positive number needs \code{suffix}.}
 
-\item{...}{arguments passed on to ggplot2::scale_y_continuous.}
+\item{...}{Other arguments passed to \code{ggplot2::scale_x_continuous()} or
+\code{ggplot2::scale_y_continuous()}, such as \code{limits} or \code{expand}.}
+
+\item{suffix}{Text to append to each label. If NULL, the function picks it
+from \code{scale}. Use this for other units, e.g. \code{suffix = " MW"}.}
+
+\item{prefix}{Text to put before each label. The dollar scales default
+to "$".}
+
+\item{big.mark}{Thousands separator. Defaults to a space, the SI style.}
+
+\item{accuracy}{Rounding for the labels, e.g. 0.1 for one decimal place.
+If NULL, the function chooses a sensible accuracy from the breaks.}
+}
+\value{
+A ggplot2 scale.
 }
 \description{
-Quickly format big.marks to commas, and scale numbers to metric units.
+Continuous axis scales that format numbers with a thousands separator and
+shorten them to metric units. For example, \code{scale_y_number(1e6)} shows
+2 500 000 as "2.5M".
+}
+\examples{
+library(ggplot2)
+df <- data.frame(year = 2025:2030, cost = c(1.2, 1.8, 2.6, 3.1, 4.4, 5.0) * 1e9)
+
+ggplot(df, aes(year, cost)) +
+  geom_line() +
+  scale_y_dollar(1e9)
+
+ggplot(df, aes(year, cost / 1e6)) +
+  geom_line() +
+  scale_y_number(suffix = " MW")
 }
