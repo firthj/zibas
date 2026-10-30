@@ -90,11 +90,21 @@ theme_ziba <- function(base_size = 11.5,
       # remove the axis tick marks and hide axis lines
       axis.ticks = ggplot2::element_blank(),
       axis.line = ggplot2::element_blank(),
+      # space between the x axis labels and the panel
+      axis.text.x = ggplot2::element_text(
+        size = ggplot2::rel(12 / 11.5),
+        margin = ggplot2::margin(t = base_size * 0.7)
+      ),
+      # space between the x axis labels and the panel
+      axis.text.y = ggplot2::element_text(
+        size = ggplot2::rel(12 / 11.5),
+        margin = ggplot2::margin(r = base_size * 0.5)
+      ),
 
       # modify the margins of the title and subtitle
       # sizes are relative to base_size; at 11.5 these match the original pts
       plot.title = ggplot2::element_text(
-        size = ggplot2::rel(30 / 11.5), hjust = 0, face = "bold",
+        size = ggplot2::rel(30 / 11.5), hjust = 0, 
         lineheight = 1,
         margin = ggplot2::margin(l = 10, b = 6, t = base_size * 0.4)
       ),
@@ -102,7 +112,7 @@ theme_ziba <- function(base_size = 11.5,
       plot.subtitle = ggplot2::element_text(
         size = ggplot2::rel(22 / 11.5), hjust = 0,
         lineheight = 1,
-        margin = ggplot2::margin(l = 10, b = 4)
+        margin = ggplot2::margin(l = 10, b = 12)
       ),
 
       # add padding to the caption
