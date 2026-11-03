@@ -104,7 +104,7 @@ theme_ziba <- function(base_size = 11.5,
       # modify the margins of the title and subtitle
       # sizes are relative to base_size; at 11.5 these match the original pts
       plot.title = ggplot2::element_text(
-        size = ggplot2::rel(30 / 11.5), hjust = 0, 
+        size = ggplot2::rel(30 / 11.5), hjust = 0,
         lineheight = 1,
         margin = ggplot2::margin(l = 10, b = 6, t = base_size * 0.4)
       ),
@@ -122,10 +122,15 @@ theme_ziba <- function(base_size = 11.5,
       ),
 
       # Adjust text size and axis title position
-      axis.title = ggplot2::element_text(size = ggplot2::rel(16 / 11.5), hjust = 0.95),
-      axis.text = ggplot2::element_text(size = ggplot2::rel(12 / 11.5)),
+      axis.title = ggplot2::element_text(size = ggplot2::rel(16 / 11.5), hjust = 0.95, margin = ggplot2::margin(t = base_size * 0.9)),
+      # space between the tick labels and the axis titles
+      axis.title.x = ggplot2::element_text(margin = ggplot2::margin(t = base_size * 0.9)),
+      axis.title.y = ggplot2::element_text(margin = ggplot2::margin(r = base_size * 0.9)),
+      # Axis and legend text
+      text = element_text(family = font_family),
+      axis.text = ggplot2::element_text(size = ggplot2::rel(12 / 11.5), family = font_family),
       legend.title = ggplot2::element_blank(),
-      legend.text = ggplot2::element_text(size = ggplot2::rel(12 / 11.5)),
+      legend.text = ggplot2::element_text(size = ggplot2::rel(12 / 11.5), family = font_family),
       strip.text = ggplot2::element_text(
         size = ggplot2::rel(14 / 11.5),
         margin = ggplot2::margin(10, 10, 10, 10, "pt")
