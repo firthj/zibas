@@ -6,12 +6,18 @@
 \usage{
 theme_ziba(
   base_size = 11.5,
+  heading_scale = 1,
   font_family = getOption("ziba.font_family", "Matter"),
   colours = NULL
 )
 }
 \arguments{
-\item{base_size}{Base font size in pts; all other text scales from this.}
+\item{base_size}{Base font size in pts; all other text and spacing scales
+from this.}
+
+\item{heading_scale}{Multiplier on the title and subtitle sizes only. Use
+values below 1 for charts placed in documents, where headings would
+otherwise overpower the body text.}
 
 \item{font_family}{Font to use in the graphs. Defaults to the
 \code{ziba.font_family} option, or "Matter" if unset.}

@@ -3,6 +3,7 @@
 export(extend_right)
 export(flip)
 export(make_beautiful_plots)
+export(make_document_plots)
 export(no_axis_labs)
 export(no_clip)
 export(no_leg)

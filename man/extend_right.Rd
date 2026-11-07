@@ -4,7 +4,7 @@
 \alias{extend_right}
 \title{Extend the right plot margin}
 \usage{
-extend_right(cm = 1.5, caption_to_edge = TRUE, caption_top = 15)
+extend_right(cm = 1.5, caption_to_edge = FALSE, caption_top = 15)
 }
 \arguments{
 \item{cm}{Right margin width in cm.}

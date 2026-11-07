@@ -1,15 +1,3 @@
-#' Use the ziba theme globally
-#'
-#' Alias for `use_ziba_theme()`, kept for older notebooks.
-#'
-#' @param ... Arguments passed to `theme_ziba()`.
-#' @return The previous theme, invisibly.
-#' @export
-make_beautiful_plots <- function(...) {
-  use_ziba_theme(...)
-}
-
-
 #' Extend the right plot margin
 #'
 #' Widens the right margin to make room for direct labels at line ends, the
@@ -23,7 +11,7 @@ make_beautiful_plots <- function(...) {
 #' @param caption_top Space above the caption in pts; matches `theme_ziba()`.
 #' @return A ggplot2 theme.
 #' @export
-extend_right <- function(cm = 1.5, caption_to_edge = TRUE, caption_top = 15) {
+extend_right <- function(cm = 1.5, caption_to_edge = FALSE, caption_top = 15) {
   # plot.margin accepts a partial unit, so theme_ziba's top room survives
   out <- ggplot2::theme(plot.margin = ggplot2::margin_part(r = cm, unit = "cm"))
 

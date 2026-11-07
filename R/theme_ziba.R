@@ -35,7 +35,11 @@ resolve_font <- function(family, fallback = "sans") {
 #' come from the session store (see `set_ziba_colours()`), and `colours`
 #' overrides them for a single plot.
 #'
-#' @param base_size Base font size in pts; all other text scales from this.
+#' @param base_size Base font size in pts; all other text and spacing scales
+#'   from this.
+#' @param heading_scale Multiplier on the title and subtitle sizes only. Use
+#'   values below 1 for charts placed in documents, where headings would
+#'   otherwise overpower the body text.
 #' @param font_family Font to use in the graphs. Defaults to the
 #'   `ziba.font_family` option, or "Matter" if unset.
 #' @param colours Optional named vector or list of colour overrides for this
@@ -45,9 +49,14 @@ resolve_font <- function(family, fallback = "sans") {
 #'
 #' @return A ggplot2 theme.
 theme_ziba <- function(base_size = 11.5,
+                       heading_scale = 1,
                        font_family = getOption("ziba.font_family", "Matter"),
                        colours = NULL) {
   font_family <- resolve_font(font_family)
+
+  # spacing designed at the 11.5pt default, scaled so smaller themes keep
+  # the same proportions
+  sp <- \(pt) pt * base_size / 11.5
 
   # start from the session colours, then apply any per-call overrides
   cols <- ziba_colours()
@@ -77,10 +86,10 @@ theme_ziba <- function(base_size = 11.5,
 
       # legend sits close under the axis, items on one line with tight spacing
       legend.position = "bottom",
-      legend.box.spacing = ggplot2::unit(4, "pt"),
+      legend.box.spacing = ggplot2::unit(sp(4), "pt"),
       legend.margin = ggplot2::margin(0, 0, 0, 0),
-      legend.key.spacing.x = ggplot2::unit(10, "pt"),
-      legend.key.spacing.y = ggplot2::unit(2, "pt"),
+      legend.key.spacing.x = ggplot2::unit(sp(10), "pt"),
+      legend.key.spacing.y = ggplot2::unit(sp(2), "pt"),
 
       # add light, dotted major grid lines only
       panel.grid.major.y = ggplot2::element_line(linetype = "dotted", linewidth = 0.2),
@@ -95,7 +104,7 @@ theme_ziba <- function(base_size = 11.5,
         size = ggplot2::rel(12 / 11.5),
         margin = ggplot2::margin(t = base_size * 0.7)
       ),
-      # space between the x axis labels and the panel
+      # space between the y axis labels and the panel
       axis.text.y = ggplot2::element_text(
         size = ggplot2::rel(12 / 11.5),
         margin = ggplot2::margin(r = base_size * 0.5)
@@ -104,21 +113,21 @@ theme_ziba <- function(base_size = 11.5,
       # modify the margins of the title and subtitle
       # sizes are relative to base_size; at 11.5 these match the original pts
       plot.title = ggplot2::element_text(
-        size = ggplot2::rel(30 / 11.5), hjust = 0,
+        size = ggplot2::rel(30 / 11.5 * heading_scale), hjust = 0,
         lineheight = 1,
-        margin = ggplot2::margin(l = 10, b = 6, t = base_size * 0.4)
+        margin = ggplot2::margin(l = sp(10), b = sp(6), t = base_size * 0.4)
       ),
       plot.title.position = "plot",
       plot.subtitle = ggplot2::element_text(
-        size = ggplot2::rel(22 / 11.5), hjust = 0,
+        size = ggplot2::rel(22 / 11.5 * heading_scale), hjust = 0,
         lineheight = 1,
-        margin = ggplot2::margin(l = 10, b = 12)
+        margin = ggplot2::margin(l = sp(10), b = sp(12))
       ),
 
       # add padding to the caption
       plot.caption = ggplot2::element_text(
         size = ggplot2::rel(11 / 11.5), hjust = 1,
-        margin = ggplot2::margin(t = 15)
+        margin = ggplot2::margin(t = sp(15))
       ),
 
       # Adjust text size and axis title position
@@ -127,13 +136,13 @@ theme_ziba <- function(base_size = 11.5,
       axis.title.x = ggplot2::element_text(margin = ggplot2::margin(t = base_size * 0.9)),
       axis.title.y = ggplot2::element_text(margin = ggplot2::margin(r = base_size * 0.9)),
       # Axis and legend text
-      text = element_text(family = font_family),
+      text = ggplot2::element_text(family = font_family),
       axis.text = ggplot2::element_text(size = ggplot2::rel(12 / 11.5), family = font_family),
       legend.title = ggplot2::element_blank(),
       legend.text = ggplot2::element_text(size = ggplot2::rel(12 / 11.5), family = font_family),
       strip.text = ggplot2::element_text(
         size = ggplot2::rel(14 / 11.5),
-        margin = ggplot2::margin(10, 10, 10, 10, "pt")
+        margin = ggplot2::margin(sp(10), sp(10), sp(10), sp(10), "pt")
       ),
 
       # make geom_text/geom_label inherit the theme font (ggplot2 >= 4.0)
@@ -143,7 +152,6 @@ theme_ziba <- function(base_size = 11.5,
   # layer colours on top; + merges, so the structural properties are kept
   structure + do.call(ggplot2::theme, ziba_colour_elements(cols))
 }
-
 
 #' Use the ziba theme globally
 #'
@@ -158,11 +166,44 @@ use_ziba_theme <- function(...) {
   old <- ggplot2::theme_set(theme_ziba(...))
   .ziba$theme_active <- TRUE
 
+
+
   # one-row legends for default discrete colour and fill scales
   options(
     ggplot2.discrete.colour = ziba_discrete_colour,
     ggplot2.discrete.fill = ziba_discrete_fill
   )
 
+
+
   invisible(old)
+}
+
+
+
+#' Use the ziba theme globally
+#'
+#' Alias for `use_ziba_theme()`, kept for older notebooks.
+#'
+#' @param ... Arguments passed to `theme_ziba()`, e.g. `base_size` and
+#'   `heading_scale`.
+#' @return The previous theme, invisibly.
+#' @export
+make_beautiful_plots <- function(...) {
+  use_ziba_theme(...)
+}
+
+
+#' Use the ziba theme sized for documents
+#'
+#' Sets a smaller ziba theme suited to charts placed at text width in PDF or
+#' Word documents, where body text is around 11pt.
+#'
+#' @param base_size Base font size in pts.
+#' @param heading_scale Multiplier on the title and subtitle sizes.
+#' @param ... Other arguments passed to `theme_ziba()`.
+#' @return The previous theme, invisibly.
+#' @export
+make_document_plots <- function(base_size = 8, heading_scale = 0.65, ...) {
+  use_ziba_theme(base_size = base_size, heading_scale = heading_scale, ...)
 }
