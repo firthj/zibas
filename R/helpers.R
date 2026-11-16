@@ -11,7 +11,7 @@
 #' @param caption_top Space above the caption in pts; matches `theme_ziba()`.
 #' @return A ggplot2 theme.
 #' @export
-extend_right <- function(cm = 1.5, caption_to_edge = FALSE, caption_top = 15) {
+extend_right <- function(cm = 1.5, caption_to_edge = TRUE, caption_top = 15) {
   # plot.margin accepts a partial unit, so theme_ziba's top room survives
   out <- ggplot2::theme(plot.margin = ggplot2::margin_part(r = cm, unit = "cm"))
 
@@ -21,7 +21,7 @@ extend_right <- function(cm = 1.5, caption_to_edge = FALSE, caption_top = 15) {
     out <- out + ggplot2::theme(
       plot.caption = ggplot2::element_text(
         hjust = 1,
-        margin = ggplot2::margin(t = caption_top, r = -cm * 72 / 2.54, unit = "pt")
+        margin = ggplot2::margin(t = caption_top, r = (-cm * 72 / 2.54) +10, unit = "pt")
       )
     )
   }
