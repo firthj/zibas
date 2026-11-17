@@ -113,15 +113,15 @@ theme_ziba <- function(base_size = 11.5,
       # modify the margins of the title and subtitle
       # sizes are relative to base_size; at 11.5 these match the original pts
       plot.title = ggplot2::element_text(
-        size = ggplot2::rel(30 / 11.5 * heading_scale), hjust = 0,
+        size = ggplot2::rel(28 / 11.5 * heading_scale), hjust = 0,
         lineheight = 1,
-        margin = ggplot2::margin(l = sp(10), b = sp(6), t = base_size * 0.4)
+        margin = ggplot2::margin(l = sp(10), b = sp(6), t = base_size * 0.4, r = sp(10))
       ),
       plot.title.position = "plot",
       plot.subtitle = ggplot2::element_text(
-        size = ggplot2::rel(22 / 11.5 * heading_scale), hjust = 0,
+        size = ggplot2::rel(20 / 11.5 * heading_scale), hjust = 0,
         lineheight = 1,
-        margin = ggplot2::margin(l = sp(10), b = sp(12))
+        margin = ggplot2::margin(l = sp(10), b = sp(20), t = sp(5))
       ),
 
       # add padding to the caption
@@ -167,7 +167,6 @@ use_ziba_theme <- function(...) {
   .ziba$theme_active <- TRUE
 
 
-
   # one-row legends for default discrete colour and fill scales
   options(
     ggplot2.discrete.colour = ziba_discrete_colour,
@@ -175,10 +174,8 @@ use_ziba_theme <- function(...) {
   )
 
 
-
   invisible(old)
 }
-
 
 
 #' Use the ziba theme globally
